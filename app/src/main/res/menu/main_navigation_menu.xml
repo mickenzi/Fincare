@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/expenses_item"
+        android:icon="@drawable/ic_baseline_expense_24"
+        android:title="@string/expenses" />
+    <item
+        android:id="@+id/budget_item"
+        android:icon="@drawable/ic_baseline_budget_24"
+        android:title="@string/budget" />
+    <item
+        android:id="@+id/reports_item"
+        android:icon="@drawable/ic_baseline_report_24"
+        android:title="@string/reports" />
+</menu>

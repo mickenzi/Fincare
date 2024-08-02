@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fincare</string>
+    <string name="expenses">Troškovi</string>
+    <string name="budget">Budžet</string>
+    <string name="reports">Izveštaji</string>
+    <string name="kind">Vrsta</string>
+    <string name="something_went_wrong">Došlo je do greške!</string>
+    <string name="something_went_wrong_message">Trenutno radimo na rešavanju problema.</string>
+    <string name="ok">OK</string>
+    <string name="date_time_format">"dd.MM.yyyy 'u' HH:mm"</string>
+    <string name="date_format">"dd.MM.yyyy"</string>
+    <string name="time_format">HH:mm</string>
+    <string name="amount">%1$d EUR</string>
+    <string name="delete">Izbriši</string>
+    <string name="cancel">Odustani</string>
+    <string name="delete_expense">Izbriši račun</string>
+    <string name="delete_expense_confirm">Da li ste sigurni da želite da izbrišete ovaj račun?</string>
+    <string name="filter">Filter</string>
+    <string name="apply">Potvrdi</string>
+    <string name="clear">Poništi</string>
+    <string name="expenses_empty_title">Lista računa je prazna!</string>
+    <string name="expense_empty_description">Još uvek nemate račune.</string>
+    <string name="add">Dodaj</string>
+    <string name="select_kind">Izaberi vrstu</string>
+    <string name="new_expense">Novi račun</string>
+    <string name="create">Kreiraj</string>
+    <string name="required_field">Ovo polje je obavezno.</string>
+    <string name="price">Cena</string>
+    <string name="please_wait">Molim sačekajte…</string>
+    <string name="currency">EUR</string>
+    <!--KIND STRINGS-->
+    <string name="food_and_drink">Hrana &amp; piće</string>
+    <string name="utilities">Računi</string>
+    <string name="grocery">Namirnice</string>
+    <string name="transport">Vozilo</string>
+    <string name="pet">Ljubimci</string>
+    <string name="entertainment">Zabava</string>
+    <string name="gym">Teretana</string>
+    <string name="clothing">Odeća</string>
+    <string name="healthcare">Zdravlje</string>
+    <string name="beauty">Nega &amp; Lepota</string>
+    <string name="debt_payments">Zaduženja</string>
+    <string name="education">Obrazovanje</string>
+    <string name="investments">Ulaganje</string>
+    <string name="other">Ostalo</string>
+</resources>

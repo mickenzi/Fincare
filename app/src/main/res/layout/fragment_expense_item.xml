@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".budget.views.BudgetFragment">
+
+    <data>
+
+        <variable
+            name="kind"
+            type="String" />
+
+        <variable
+            name="time"
+            type="String" />
+
+        <variable
+            name="amount"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_expense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_spacing"
+        android:layout_marginVertical="@dimen/small_spacing"
+        android:background="@drawable/card_background"
+        android:elevation="@dimen/card_elevation"
+        android:padding="@dimen/medium_spacing">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cw_kind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_spacing"
+            android:elevation="@dimen/card_elevation"
+            app:cardCornerRadius="@dimen/item_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iw_kind"
+                android:layout_width="@dimen/medium_image_width"
+                android:layout_height="@dimen/medium_image_height"
+                android:layout_margin="@dimen/small_spacing"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/kind"
+                android:scaleType="fitXY" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_spacing"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/cw_kind"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cw_kind"
+            app:layout_constraintTop_toTopOf="@id/cw_kind">
+
+            <TextView
+                android:id="@+id/tv_kind"
+                style="@style/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{kind}" />
+
+            <TextView
+                android:id="@+id/tv_amount"
+                style="@style/item_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{amount}" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/item_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{time}"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

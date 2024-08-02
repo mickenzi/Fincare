@@ -1,0 +1,35 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.FinCare" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/on_primary_color</item>
+        <item name="colorPrimaryContainer">@color/primary_container_color</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container_color</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary_color</item>
+        <item name="colorOnSecondary">@color/on_secondary_color</item>
+        <item name="colorSecondaryContainer">@color/secondary_container_color</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container_color</item>
+        <!-- Tertiary brand color. -->
+        <item name="colorTertiary">@color/tertiary_color</item>
+        <item name="colorOnTertiary">@color/on_tertiary_color</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container_color</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container_color</item>
+        <!-- Surface brand color. -->
+        <item name="android:colorBackground">@color/background_color</item>
+        <item name="colorOnBackground">@color/on_background_color</item>
+        <item name="colorSurface">@color/surface_color</item>
+        <item name="colorOnSurface">@color/on_surface_color</item>
+        <item name="colorSurfaceVariant">@color/surface_variant_color</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant_color</item>
+        <item name="colorOutline">@color/outline_color</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.AppSplashScreen" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.FinCare</item>
+    </style>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    android:menuCategory="secondary"
+    app:startDestination="@id/main_fragment">
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="com.financialcare.fincare.main.views.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_from_expenses_to_expenses_filter"
+            app:destination="@id/expenses_filter_navigation" />
+        <action
+            android:id="@+id/action_from_expenses_to_add_expense"
+            app:destination="@id/add_expense_navigation" />
+    </fragment>
+    <navigation android:id="@+id/expenses_filter_navigation"
+        app:startDestination="@id/expenses_filter_fragment">
+        <fragment
+            android:id="@+id/expenses_filter_fragment"
+            android:name="com.financialcare.fincare.expenses.filter.views.ExpensesFilterFragment"
+            android:label="ExpensesFilterFragment" />
+    </navigation>
+    <navigation android:id="@+id/add_expense_navigation"
+        app:startDestination="@id/add_expense_fragment">
+        <fragment
+            android:id="@+id/add_expense_fragment"
+            android:name="com.financialcare.fincare.expenses.add.views.AddExpenseFragment"
+            android:label="AddExpenseFragment" >
+            <action
+                android:id="@+id/action_from_add_expense_to_select_kind"
+                app:destination="@id/select_kind_fragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/select_kind_fragment"
+            android:name="com.financialcare.fincare.kinds.select.single.views.SelectKindFragment"
+            android:label="SelectKindFragment" />
+        <action
+            android:id="@+id/action_from_add_expense_to_expenses"
+            app:destination="@id/main_fragment" />
+    </navigation>
+</navigation>

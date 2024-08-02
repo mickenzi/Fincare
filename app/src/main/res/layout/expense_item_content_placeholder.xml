@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/medium_spacing">
+
+    <ImageView
+        android:id="@+id/cw_kind"
+        android:layout_width="@dimen/medium_image_width"
+        android:layout_height="@dimen/medium_image_height"
+        android:background="@drawable/placeholder_item_background"
+        android:contentDescription="@string/kind"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_spacing"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/cw_kind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cw_kind"
+        app:layout_constraintTop_toTopOf="@id/cw_kind">
+
+        <TextView
+            android:id="@+id/tv_kind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/placeholder_item_background" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_spacing"
+            android:background="@drawable/placeholder_item_background" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

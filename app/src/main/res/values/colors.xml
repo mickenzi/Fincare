@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary brand color. -->
+    <color name="primary_color">#35618E</color>
+    <color name="on_primary_color">#FFFFFF</color>
+    <color name="primary_container_color">#D1E4FF</color>
+    <color name="on_primary_container_color">#001D35</color>
+    <!-- Secondary brand color. -->
+    <color name="secondary_color">#3FC1C9</color>
+    <color name="on_secondary_color">#FFFFFF</color>
+    <color name="secondary_container_color">#9CF0F6</color>
+    <color name="on_secondary_container_color">#002022</color>
+    <!-- Tertiary brand color. -->
+    <color name="tertiary_color">#4E5F7D</color>
+    <color name="on_tertiary_color">#FFFFFF</color>
+    <color name="tertiary_container_color">#D6E3FF</color>
+    <color name="on_tertiary_container_color">#091B36</color>
+    <!-- Surface brand color. -->
+    <color name="surface_color">#FEFBFF</color>
+    <color name="on_surface_color">#1B1B1F</color>
+    <color name="surface_variant_color">#E2E2EC</color>
+    <color name="on_surface_variant_color">#44464F</color>
+    <!-- Background brand color. -->
+    <color name="background_color">#F8F9FF</color>
+    <color name="on_background_color">#1B1B1F</color>
+    <color name="outline_color">#757780</color>
+    <!-- Custom color. -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="content_placeholder_background">#D4D4D4</color>
+    <color name="red">#CC0000</color>
+</resources>

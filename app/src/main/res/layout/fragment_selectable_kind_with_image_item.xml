@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <import type="kotlin.Unit" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="select"
+            type="Function0&lt;Unit&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/short_divider"
+        android:foreground="?attr/selectableItemBackground"
+        android:onClick="@{() -> select.invoke()}"
+        android:paddingHorizontal="@dimen/screen_spacing"
+        android:paddingVertical="@dimen/medium_spacing">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cw_kind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/item_corner_radius"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iw_kind"
+                android:layout_width="@dimen/medium_image_width"
+                android:layout_height="@dimen/medium_image_height"
+                android:layout_margin="@dimen/small_spacing"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/kind"
+                android:scaleType="fitXY" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_spacing"
+            android:text="@{name}"
+            app:layout_constraintBottom_toBottomOf="@id/cw_kind"
+            app:layout_constraintStart_toEndOf="@id/cw_kind"
+            app:layout_constraintTop_toTopOf="@id/cw_kind" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".expense.add.views.AddExpenseFragment">
+
+    <data>
+
+        <import type="kotlin.Unit" />
+
+        <import type="io.reactivex.rxjava3.core.Observable" />
+
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <import type="kotlin.jvm.functions.Function1" />
+
+        <variable
+            name="amount"
+            type="String" />
+
+        <variable
+            name="kind"
+            type="String" />
+
+        <variable
+            name="isAmountValid"
+            type="Observable&lt;Boolean&gt;" />
+
+        <variable
+            name="areExpenseDataValid"
+            type="Observable&lt;Boolean&gt;" />
+
+        <variable
+            name="selectKind"
+            type="Function0&lt;Unit&gt;" />
+
+        <variable
+            name="setAmount"
+            type="Function1&lt;String, Unit&gt;" />
+
+        <variable
+            name="create"
+            type="Function0&lt;Unit&gt;" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:title="@string/new_expense">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/screen_spacing">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_kind"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_spacing"
+                android:hint="@string/kind"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_kind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    android:focusable="false"
+                    android:inputType="text"
+                    android:onClick="@{() -> selectKind.invoke()}"
+                    android:text="@{kind}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_amount"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/price"
+                app:prefixText="@string/currency"
+                app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge"
+                app:error="@{@string/required_field}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_kind"
+                app:rxValidation="@{isAmountValid}">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@{amount}"
+                    app:onTextChange="@{setAmount}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                style="@style/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> create.invoke()}"
+                android:text="@string/create"
+                android:enabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rxEnable="@{areExpenseDataValid}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>

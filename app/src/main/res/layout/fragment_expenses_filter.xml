@@ -1,0 +1,95 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".expenses.filter.views.ExpensesFilterFragment">
+
+    <data>
+
+        <import type="kotlin.Unit" />
+
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <import type="io.reactivex.rxjava3.core.Observable" />
+
+        <variable
+            name="areFilterParamsSelected"
+            type="Observable&lt;Boolean&gt;" />
+
+        <variable
+            name="apply"
+            type="Function0&lt;Unit&gt;" />
+
+        <variable
+            name="clear"
+            type="Function0&lt;Unit&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_filter_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl_filter_expenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:title="@string/filter">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_kinds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/abl_filter_expenses" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            style="@style/outlined_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> clear.invoke()}"
+            android:text="@string/clear"
+            android:visibility="gone"
+            app:layout_constraintWidth_default="spread"
+            app:rxVisible="@{areFilterParamsSelected}" />
+
+
+        <Button
+            android:id="@+id/btn_apply"
+            style="@style/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> apply.invoke()}"
+            android:text="@string/apply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_default="spread" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/btn_flow"
+            style="@style/horizontal_buttons_flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_spacing"
+            android:layout_marginVertical="@dimen/medium_spacing"
+            app:constraint_referenced_ids="btn_clear,btn_apply"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

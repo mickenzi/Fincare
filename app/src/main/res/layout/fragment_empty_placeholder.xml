@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/ll_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_spacing">
+
+        <ImageView
+            android:layout_width="@dimen/medium_image_width"
+            android:layout_height="@dimen/medium_image_height"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/expenses"
+            android:src="@drawable/ic_baseline_expense_24" />
+
+        <TextView
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_spacing"
+            android:gravity="center_horizontal"
+            android:text="@string/expenses_empty_title" />
+
+        <TextView
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_spacing"
+            android:gravity="center_horizontal"
+            android:text="@string/expense_empty_description" />
+
+    </LinearLayout>
+
+</layout>

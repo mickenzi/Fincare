@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fincare</string>
+    <string name="expenses">Expenses</string>
+    <string name="budget">Budget</string>
+    <string name="reports">Reports</string>
+    <string name="kind">Kind</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="something_went_wrong_message">We are working on fixing the problem.</string>
+    <string name="ok">OK</string>
+    <string name="date_time_format">"MM/dd/yyyy 'at' hh:mm a"</string>
+    <string name="date_format">"MM/dd/yyyy"</string>
+    <string name="time_format">hh:mm a</string>
+    <string name="amount">%1$d EUR</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_expense">Delete Expense</string>
+    <string name="delete_expense_confirm">Are you sre you want to delete this expense?</string>
+    <string name="filter">Filter</string>
+    <string name="apply">Apply</string>
+    <string name="clear">Clear</string>
+    <string name="expenses_empty_title">It looks a bit empty here!</string>
+    <string name="expense_empty_description">You haven\'t add any expense yet.</string>
+    <string name="add">Add</string>
+    <string name="select_kind">Select Kind</string>
+    <string name="new_expense">New Expense</string>
+    <string name="create">Create</string>
+    <string name="required_field">This is a required field.</string>
+    <string name="price">Price</string>
+    <string name="please_wait">Please Wait…</string>
+    <string name="currency">EUR</string>
+    <!--KIND STRINGS-->
+    <string name="food_and_drink">Food &amp; Drink</string>
+    <string name="utilities">Utilities</string>
+    <string name="grocery">Grocery</string>
+    <string name="transport">Transport</string>
+    <string name="pet">Pet</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="gym">Gym</string>
+    <string name="clothing">Clothing</string>
+    <string name="healthcare">Healthcare</string>
+    <string name="beauty">Beauty</string>
+    <string name="debt_payments">Debt payments</string>
+    <string name="education">Education</string>
+    <string name="investments">Investments</string>
+    <string name="other">Other</string>
+</resources>
