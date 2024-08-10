@@ -39,8 +39,11 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>(R.layout.fragment
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    if (newState == SCROLL_STATE_IDLE) binding.fabAddExpense.show()
-                    else binding.fabAddExpense.hide()
+                    if (newState == SCROLL_STATE_IDLE) {
+                        binding.fabAddExpense.show()
+                    } else {
+                        binding.fabAddExpense.hide()
+                    }
                 }
             })
         }
@@ -52,12 +55,19 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>(R.layout.fragment
             }
             .addTo(compositeDisposable)
 
-        val notificationDialog = NotificationDialogBuilder.create(context, R.string.ok, DialogInterface::dismiss)
+        val notificationDialog = NotificationDialogBuilder.create(
+            context,
+            R.string.ok,
+            DialogInterface::dismiss
+        )
 
         expensesViewModel.error
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                notificationDialog.show(R.string.something_went_wrong, R.string.something_went_wrong_message)
+                notificationDialog.show(
+                    R.string.something_went_wrong,
+                    R.string.something_went_wrong_message
+                )
             }
             .addTo(compositeDisposable)
 
@@ -98,15 +108,15 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>(R.layout.fragment
             .addTo(compositeDisposable)
 
         val scrollListener = object : EndlessRecyclerViewScrollListener<ExpensesAdapter.Companion.ExpenseItem>(
-                expenseLayoutManager,
-                expensesAdapter
-            ) {
-                override fun onLoadMore(lastItem: ExpensesAdapter.Companion.ExpenseItem) {
-                    if (lastItem is ExpensesAdapter.Companion.ExpenseItem.Item) {
-                        expensesViewModel.loadMore(lastItem.id, lastItem.time)
-                    }
+            expenseLayoutManager,
+            expensesAdapter
+        ) {
+            override fun onLoadMore(lastItem: ExpensesAdapter.Companion.ExpenseItem) {
+                if (lastItem is ExpensesAdapter.Companion.ExpenseItem.Item) {
+                    expensesViewModel.loadMore(lastItem.id, lastItem.time)
                 }
             }
+        }
 
         binding.rvExpenses.addOnScrollListener(scrollListener)
 
@@ -118,7 +128,9 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>(R.layout.fragment
             if (item.itemId == R.id.filter) {
                 findNavController().navigate(R.id.action_from_expenses_to_expenses_filter)
                 true
-            } else false
+            } else {
+                false
+            }
         }
 
         binding.add = {

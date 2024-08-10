@@ -7,11 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 object NotificationDialogBuilder {
-    fun create(
-        context: Context,
-        confirmId: Int,
-        onConfirm: (DialogInterface) -> Unit
-    ): AlertDialog {
+    fun create(context: Context, confirmId: Int, onConfirm: (DialogInterface) -> Unit): AlertDialog {
         return MaterialAlertDialogBuilder(context)
             .setCancelable(false)
             .setPositiveButton(context.getString(confirmId)) { dialog, _ ->

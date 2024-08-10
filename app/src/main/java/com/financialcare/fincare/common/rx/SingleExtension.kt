@@ -7,7 +7,10 @@ inline fun <A : Any, reified E> Single<A>.either(): Single<Either<E, A>> {
     return this
         .map<Either<E, A>> { Either.Right(it) }
         .onErrorResumeNext {
-            if (it is E) Single.just(Either.Left(it))
-            else Single.fromObservable(Observable.empty())
+            if (it is E) {
+                Single.just(Either.Left(it))
+            } else {
+                Single.fromObservable(Observable.empty())
+            }
         }
 }

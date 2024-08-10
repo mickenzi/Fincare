@@ -17,10 +17,18 @@ class ContentPlaceholderView(context: Context, attrs: AttributeSet) : LinearLayo
         val binding: FragmentContentPlaceholderBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_content_placeholder, this, true)
 
-        val attributes = context.theme.obtainStyledAttributes(attrs, R.styleable.ContentPlaceholderView, 0, 0)
+        val attributes = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.ContentPlaceholderView,
+            0,
+            0
+        )
 
         val layout = attributes.getResourceIdOrThrow(R.styleable.ContentPlaceholderView_layout)
-        val numOfRepetitions = attributes.getInteger(R.styleable.ContentPlaceholderView_numberOfRepetitions, 1)
+        val numOfRepetitions = attributes.getInteger(
+            R.styleable.ContentPlaceholderView_numberOfRepetitions,
+            1
+        )
 
         if (numOfRepetitions > MAX_NUMBER_OF_REPETITIONS) throw IllegalArgumentException()
 
@@ -35,4 +43,3 @@ class ContentPlaceholderView(context: Context, attrs: AttributeSet) : LinearLayo
         private const val MAX_NUMBER_OF_REPETITIONS = 30
     }
 }
-

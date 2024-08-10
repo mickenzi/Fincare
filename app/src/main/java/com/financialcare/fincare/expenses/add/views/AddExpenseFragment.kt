@@ -56,12 +56,19 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>(R.layout.frag
             }
             .addTo(compositeDisposable)
 
-        val notificationDialog = NotificationDialogBuilder.create(context, R.string.ok, DialogInterface::dismiss)
+        val notificationDialog = NotificationDialogBuilder.create(
+            context,
+            R.string.ok,
+            DialogInterface::dismiss
+        )
 
         addExpenseViewModel.error
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                notificationDialog.show(R.string.something_went_wrong, R.string.something_went_wrong_message)
+                notificationDialog.show(
+                    R.string.something_went_wrong,
+                    R.string.something_went_wrong_message
+                )
             }
             .addTo(compositeDisposable)
 
@@ -97,5 +104,7 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>(R.layout.frag
         return context.getString(resId)
     }
 
-    private val addExpenseViewModel: AddExpenseViewModel by hiltNavGraphViewModels(R.id.add_expense_navigation)
+    private val addExpenseViewModel: AddExpenseViewModel by hiltNavGraphViewModels(
+        R.id.add_expense_navigation
+    )
 }

@@ -36,20 +36,10 @@ object BindingAdapters {
     }
 
     private interface AfterTextChangedWatcher : TextWatcher {
-        override fun beforeTextChanged(
-            charSequence: CharSequence,
-            start: Int,
-            count: Int,
-            after: Int
-        ) {
+        override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {
         }
 
-        override fun onTextChanged(
-            charSequence: CharSequence,
-            start: Int,
-            before: Int,
-            count: Int
-        ) {
+        override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
         }
     }
 }

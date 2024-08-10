@@ -29,18 +29,17 @@ object ObservableBindingAdapters {
 
     @JvmStatic
     @BindingAdapter(value = ["rxValidation", "error"], requireAll = false)
-    fun rxValidation(
-        textInput: TextInputLayout,
-        observable: Observable<Boolean>,
-        errorText: String
-    ) {
+    fun rxValidation(textInput: TextInputLayout, observable: Observable<Boolean>, errorText: String) {
         val baseFragment = textInput.findFragment<BaseFragment<Nothing>>()
 
         observable
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { isValid ->
-                if (isValid) textInput.setValidStyle()
-                else textInput.setInvalidStyle(errorText)
+                if (isValid) {
+                    textInput.setValidStyle()
+                } else {
+                    textInput.setInvalidStyle(errorText)
+                }
             }
             .addTo(baseFragment.compositeDisposable)
     }

@@ -26,7 +26,8 @@ interface ExpensesDao : ExpensesDBRepository {
         val endDate = YearMonth.of(year, month).atEndOfMonth()
 
         val st = OffsetDateTime.of(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), offset)
-        val et = OffsetDateTime.of(LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)), offset)
+        val et =
+            OffsetDateTime.of(LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)), offset)
 
         add(expense)
         edit(year, month, expense.amount, kind(st.toLong(), et.toLong()))
@@ -40,7 +41,8 @@ interface ExpensesDao : ExpensesDBRepository {
         val endDate = YearMonth.now().atEndOfMonth()
 
         val st = OffsetDateTime.of(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), offset)
-        val et = OffsetDateTime.of(LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)), offset)
+        val et =
+            OffsetDateTime.of(LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)), offset)
 
         return if (kinds.isEmpty()) all(st.toLong(), et.toLong(), id, time, pageSize)
         else all(st.toLong(), et.toLong(), id, time, kinds, pageSize)
@@ -59,7 +61,10 @@ interface ExpensesDao : ExpensesDBRepository {
         val endDate = YearMonth.of(year, month).atEndOfMonth()
 
         val st = OffsetDateTime.of(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), offset)
-        val et = OffsetDateTime.of(LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)), offset)
+        val et = OffsetDateTime.of(
+            LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)),
+            offset
+        )
 
         delete(expense.id)
         edit(year, month, expense.amount, kind(st.toLong(), et.toLong()))
@@ -88,13 +93,7 @@ interface ExpensesDao : ExpensesDBRepository {
             "AND (:time IS NULL OR time < :time OR (time = :time AND id > :id))" +
             "ORDER BY time DESC LIMIT :pageSize"
     )
-    fun all(
-        startTime: Long,
-        endTime: Long,
-        id: String?,
-        time: Long?,
-        pageSize: Int
-    ): Single<List<ExpenseEnt>>
+    fun all(startTime: Long, endTime: Long, id: String?, time: Long?, pageSize: Int): Single<List<ExpenseEnt>>
 
     @Query("SELECT * FROM expenses")
     override fun all(): Single<List<ExpenseEnt>>

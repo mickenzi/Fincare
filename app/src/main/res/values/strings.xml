@@ -10,6 +10,7 @@
     <string name="ok">OK</string>
     <string name="date_time_format">"MM/dd/yyyy 'at' hh:mm a"</string>
     <string name="date_format">"MM/dd/yyyy"</string>
+    <string name="month_format">MM/yyyy</string>
     <string name="time_format">hh:mm a</string>
     <string name="amount">%1$d EUR</string>
     <string name="delete">Delete</string>
@@ -29,6 +30,9 @@
     <string name="price">Price</string>
     <string name="please_wait">Please Wait…</string>
     <string name="currency">EUR</string>
+    <string name="add_budget">Add Budget</string>
+    <string name="add_budget_info">Please define your monthly budget for %1$s before continue</string>
+    <string name="income">Income</string>
     <!--KIND STRINGS-->
     <string name="food_and_drink">Food &amp; Drink</string>
     <string name="utilities">Utilities</string>

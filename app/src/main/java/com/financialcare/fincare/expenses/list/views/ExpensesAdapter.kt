@@ -34,8 +34,12 @@ class ExpensesAdapter(
         val inflater = LayoutInflater.from(parent.context)
         val binding: ViewBinding = DataBindingUtil.inflate(inflater, viewType, parent, false)
         return when (viewType) {
-            R.layout.fragment_expense_header -> ExpenseHeaderViewHolder(binding as FragmentExpenseHeaderBinding)
-            R.layout.fragment_expense_item -> ExpenseItemViewHolder(binding as FragmentExpenseItemBinding)
+            R.layout.fragment_expense_header -> ExpenseHeaderViewHolder(
+                binding as FragmentExpenseHeaderBinding
+            )
+            R.layout.fragment_expense_item -> ExpenseItemViewHolder(
+                binding as FragmentExpenseItemBinding
+            )
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
@@ -48,7 +52,9 @@ class ExpensesAdapter(
                 holder.binding.kind = localize(expense.kind)
                 holder.binding.time = expense.time.format(timeFormatter)
                 holder.binding.amount = context.getString(R.string.amount, expense.amount)
-                holder.binding.iwKind.setImageResource(expense.image ?: R.drawable.ic_baseline_expense_24)
+                holder.binding.iwKind.setImageResource(
+                    expense.image ?: R.drawable.ic_baseline_expense_24
+                )
             }
 
             is ExpenseHeaderViewHolder -> {
@@ -104,13 +110,26 @@ class ExpensesAdapter(
     private val dateFormatter = DateTimeFormatter.ofPattern(context.getString(R.string.date_format))
     private val timeFormatter = DateTimeFormatter.ofPattern(context.getString(R.string.time_format))
 
-    class ExpenseItemViewHolder(val binding: FragmentExpenseItemBinding) : RecyclerView.ViewHolder(binding.root)
-    class ExpenseHeaderViewHolder(val binding: FragmentExpenseHeaderBinding) : RecyclerView.ViewHolder(binding.root)
+    class ExpenseItemViewHolder(val binding: FragmentExpenseItemBinding) : RecyclerView.ViewHolder(
+        binding.root
+    )
+    class ExpenseHeaderViewHolder(val binding: FragmentExpenseHeaderBinding) : RecyclerView.ViewHolder(
+        binding.root
+    )
 
-    private inner class ItemTouchHelperCallback : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+    private inner class ItemTouchHelperCallback : ItemTouchHelper.SimpleCallback(
+        0,
+        ItemTouchHelper.LEFT
+    ) {
         override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-            return if (viewHolder is ExpenseItemViewHolder) super.getMovementFlags(recyclerView, viewHolder)
-            else 0
+            return if (viewHolder is ExpenseItemViewHolder) {
+                super.getMovementFlags(
+                    recyclerView,
+                    viewHolder
+                )
+            } else {
+                0
+            }
         }
 
         override fun onChildDraw(

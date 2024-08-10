@@ -97,7 +97,6 @@ class ExpensesViewModel @Inject constructor(
             .replay(1)
             .autoConnect()
 
-
         val loadedExpenses = queryParams
             .switchMapSingle { (pageParams, filterParams) ->
                 expensesRepository
@@ -111,8 +110,11 @@ class ExpensesViewModel @Inject constructor(
             .filterRight()
             .withLatestFrom(queryParams.map { (pageParams, _) -> pageParams }, ::Pair)
             .scan<List<Expense>>(emptyList()) { acc, (expenses, pageParams) ->
-                if (pageParams.lastId.isNullOrEmpty()) expenses
-                else acc + expenses
+                if (pageParams.lastId.isNullOrEmpty()) {
+                    expenses
+                } else {
+                    acc + expenses
+                }
             }
             .skip(1)
 

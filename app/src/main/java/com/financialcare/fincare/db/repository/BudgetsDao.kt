@@ -11,7 +11,7 @@ interface BudgetsDao : BudgetsDBRepository {
     @Insert
     override fun insert(budgetEnt: BudgetEnt): Single<Unit>
 
-    @Query("UPDATE budgets SET income = income + :income WHERE year = :year AND month = :month")
+    @Query("UPDATE budgets SET income = :income WHERE year = :year AND month = :month")
     override fun edit(year: Int, month: Int, income: Long): Single<Unit>
 
     @Query("SELECT * FROM budgets WHERE month = :month")

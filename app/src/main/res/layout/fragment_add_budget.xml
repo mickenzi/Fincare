@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".budget.add.views.AddBudgetFragment">
+
+    <data>
+
+        <import type="kotlin.Unit" />
+
+        <import type="io.reactivex.rxjava3.core.Observable" />
+
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <import type="kotlin.jvm.functions.Function1" />
+
+        <variable
+            name="info"
+            type="String" />
+
+        <variable
+            name="isIncomeValid"
+            type="Observable&lt;Boolean&gt;" />
+
+        <variable
+            name="setIncome"
+            type="Function1&lt;String, Unit&gt;" />
+
+        <variable
+            name="add"
+            type="Function0&lt;Unit&gt;" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/add_budget" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/screen_spacing">
+
+            <TextView
+                android:id="@+id/add_budget_info"
+                style="@style/TextAppearance.Material3.LabelMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{info}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_income"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_spacing"
+                android:hint="@string/income"
+                app:prefixText="@string/currency"
+                app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge"
+                app:error="@{@string/required_field}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_budget_info"
+                app:rxValidation="@{isIncomeValid}">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_income"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    app:onTextChange="@{setIncome}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add"
+                app:rxEnable="@{isIncomeValid}"
+                android:enabled="false"
+                android:onClick="@{() -> add.invoke()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</layout>

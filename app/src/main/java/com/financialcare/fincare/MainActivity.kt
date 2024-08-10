@@ -19,7 +19,10 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main, R.id.main_nav_fragment) {
+class MainActivity : BaseActivity<ActivityMainBinding>(
+    R.layout.activity_main,
+    R.id.main_nav_fragment
+) {
     @Inject
     lateinit var expensesRepository: ExpensesRepository
 

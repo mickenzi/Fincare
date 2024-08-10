@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_from_expenses_to_add_expense"
             app:destination="@id/add_expense_navigation" />
+        <action
+            android:id="@+id/action_from_budget_to_add_budget"
+            app:destination="@id/add_budget_navigation" />
     </fragment>
     <navigation android:id="@+id/expenses_filter_navigation"
         app:startDestination="@id/expenses_filter_fragment">
@@ -39,6 +42,23 @@
             android:label="SelectKindFragment" />
         <action
             android:id="@+id/action_from_add_expense_to_expenses"
+            app:destination="@id/main_fragment" />
+    </navigation>
+    <navigation android:id="@+id/add_budget_navigation"
+        app:startDestination="@id/add_budget_fragment">
+        <fragment
+            android:id="@+id/add_budget_fragment"
+            android:name="com.financialcare.fincare.budget.add.views.AddBudgetFragment"
+            android:label="AddBudgetFragment" >
+            <argument
+                android:name="year"
+                app:argType="integer" />
+            <argument
+                android:name="month"
+                app:argType="integer" />
+        </fragment>
+        <action
+            android:id="@+id/action_from_add_budget_to_budget"
             app:destination="@id/main_fragment" />
     </navigation>
 </navigation>

@@ -10,6 +10,7 @@
     <string name="ok">OK</string>
     <string name="date_time_format">"dd.MM.yyyy 'u' HH:mm"</string>
     <string name="date_format">"dd.MM.yyyy"</string>
+    <string name="month_format">MM.yyyy</string>
     <string name="time_format">HH:mm</string>
     <string name="amount">%1$d EUR</string>
     <string name="delete">Izbriši</string>
@@ -29,6 +30,9 @@
     <string name="price">Cena</string>
     <string name="please_wait">Molim sačekajte…</string>
     <string name="currency">EUR</string>
+    <string name="add_budget">Dodaj budžet</string>
+    <string name="add_budget_info">Molimo Vas da definišete vaš mesečni budžet za %1$s pre nego što nastavite</string>
+    <string name="income">Prihod</string>
     <!--KIND STRINGS-->
     <string name="food_and_drink">Hrana &amp; piće</string>
     <string name="utilities">Računi</string>

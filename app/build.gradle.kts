@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.safeargs)
     id("kotlin-kapt")
     kotlin("kapt")
 }
@@ -28,7 +29,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             buildConfigField("String", "DB", "\"fincaredb\"")
         }
 
@@ -83,15 +87,9 @@ dependencies {
     implementation(libs.rx.android)
     implementation(libs.rx.kotlin)
 
-    //Coroutines
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.rx)
-
     // Room
     implementation(libs.room)
     implementation(libs.room.rxjava)
-    implementation(libs.room.coroutines)
     annotationProcessor(libs.room.compiler)
     kapt(libs.room.compiler)
 

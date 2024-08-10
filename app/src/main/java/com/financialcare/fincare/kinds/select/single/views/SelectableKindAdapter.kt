@@ -16,9 +16,14 @@ class SelectableKindAdapter(
     private val select: (String) -> Unit
 ) : ArrayAdapter<Kind>(context, R.layout.fragment_selectable_kind_with_image_item, kinds) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val binding = convertView?.let { DataBindingUtil.getBinding<FragmentSelectableKindWithImageItemBinding>(it) }
+        val binding = convertView?.let {
+            DataBindingUtil.getBinding<FragmentSelectableKindWithImageItemBinding>(
+                it
+            )
+        }
             ?: DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context), R.layout.fragment_selectable_kind_with_image_item,
+                LayoutInflater.from(parent.context),
+                R.layout.fragment_selectable_kind_with_image_item,
                 parent,
                 false
             )

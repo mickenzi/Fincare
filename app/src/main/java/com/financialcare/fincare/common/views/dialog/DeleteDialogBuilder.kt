@@ -1,7 +1,6 @@
 package com.financialcare.fincare.common.views.dialog
 
 import android.content.Context
-import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat

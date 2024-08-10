@@ -35,7 +35,12 @@ class ExpensesService @Inject constructor(
 
     override fun all(pageParams: PaginationParams, filterParams: FilterParams): Single<List<Expense>> {
         return expensesDBRepository
-            .all(pageParams.lastId, pageParams.lastTime?.toLong(), filterParams.kinds, pageParams.pageSize)
+            .all(
+                pageParams.lastId,
+                pageParams.lastTime?.toLong(),
+                filterParams.kinds,
+                pageParams.pageSize
+            )
             .observeOn(Schedulers.computation())
             .map { it.map(::toExpense) }
             .onErrorResumeNext { Single.error(ExpensesError.Unknown(it.message ?: "Unknown error.")) }

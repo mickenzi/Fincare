@@ -3,8 +3,6 @@ package com.financialcare.fincare.common.views.bindings
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
-import androidx.core.content.res.ResourcesCompat
-import com.example.fincare.R
 import com.google.android.material.textfield.TextInputLayout
 
 object TextInputLayoutExtension {

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import com.example.fincare.R
 import com.example.fincare.databinding.FragmentMainBinding
-import com.financialcare.fincare.budget.views.BudgetFragment
+import com.financialcare.fincare.budget.one.views.BudgetFragment
 import com.financialcare.fincare.common.views.BaseFragment
 import com.financialcare.fincare.common.views.page.PageAdapter
 import com.financialcare.fincare.common.views.page.Screen
