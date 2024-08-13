@@ -81,6 +81,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.swiperefresh)
+    implementation(libs.calendar)
 
     // RxJava
     implementation(libs.rx.java)
