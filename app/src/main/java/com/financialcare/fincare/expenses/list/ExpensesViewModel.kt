@@ -51,6 +51,8 @@ class ExpensesViewModel @Inject constructor(
     val expenses: Observable<List<Expense>>
     val error: Observable<ExpensesError>
 
+    val deletedExpense: Observable<Unit>
+
     val selectedFilterParams: Observable<FilterParams>
 
     val startDeleting: Observable<Unit>
@@ -81,8 +83,10 @@ class ExpensesViewModel @Inject constructor(
             .replay(1)
             .refCount()
 
+        this.deletedExpense = deletedExpense.filterRight()
+
         val expensesEvent = expensesEventSubject
-            .mergeWith(deletedExpense.filterRight().map { ExpensesEvent.Reload })
+            .mergeWith(this.deletedExpense.map { ExpensesEvent.Reload })
             .startWithItem(ExpensesEvent.LoadMore(PaginationParams.empty))
 
         val queryParams = expensesEvent

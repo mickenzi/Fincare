@@ -4,8 +4,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.OffsetDateTime
-import java.time.temporal.WeekFields
-import java.util.Locale
+import java.time.YearMonth
 import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import com.financialcare.fincare.common.rx.either
@@ -13,6 +12,7 @@ import com.financialcare.fincare.common.rx.filterLeft
 import com.financialcare.fincare.common.rx.filterRight
 import com.financialcare.fincare.expenses.ExpensesError
 import com.financialcare.fincare.expenses.ExpensesRepository
+import com.kizitonwose.calendar.core.atStartOfMonth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
@@ -93,7 +93,7 @@ class AddExpenseViewModel @Inject constructor(
 
         maxDate = now
 
-        minDate = now.with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1)
+        minDate = YearMonth.now().atStartOfMonth()
 
         kind = kindSubject
 

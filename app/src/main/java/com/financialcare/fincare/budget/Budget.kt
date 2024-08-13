@@ -7,6 +7,6 @@ data class Budget(
     val debt: Long = 0,
     val balance: Long = 0,
     val month: YearMonth,
-    val maxExpenseDebt: Long? = null,
+    val maxExpenseAmount: Long? = null,
     val maxExpenseKind: String? = null
 )

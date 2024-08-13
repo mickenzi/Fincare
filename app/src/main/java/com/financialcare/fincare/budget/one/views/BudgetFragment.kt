@@ -106,10 +106,10 @@ class BudgetFragment : BaseFragment<FragmentBudgetBinding>(R.layout.fragment_bud
         binding.income = "${budget.income} $currency"
         binding.debt = "${budget.debt} $currency"
         binding.balance = "${budget.balance} $currency"
-        binding.maxExpenseAmount = "${budget.maxExpenseDebt} $currency"
+        binding.maxExpenseAmount = "${budget.maxExpenseAmount} $currency"
         binding.maxExpenseKind = budget.maxExpenseKind?.let { localize(it, context) } ?: ""
 
-        val maxExpenseAmountVisibility = budget.maxExpenseDebt?.let { View.VISIBLE } ?: View.GONE
+        val maxExpenseAmountVisibility = budget.maxExpenseAmount?.let { View.VISIBLE } ?: View.GONE
         binding.tvMaxExpenseAmountTitle.visibility = maxExpenseAmountVisibility
         binding.tvMaxExpenseAmount.visibility = maxExpenseAmountVisibility
 

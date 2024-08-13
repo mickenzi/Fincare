@@ -13,8 +13,8 @@ data class BudgetEnt(
     val year: Int,
     @ColumnInfo(name = "month")
     val month: Int,
-    @ColumnInfo(name = "max_expense_debt")
-    val maxExpenseDebt: Long?,
+    @ColumnInfo(name = "max_expense_amount")
+    val maxExpenseAmount: Long?,
     @ColumnInfo(name = "max_expense_kind")
     val maxExpenseKind: String?
 )

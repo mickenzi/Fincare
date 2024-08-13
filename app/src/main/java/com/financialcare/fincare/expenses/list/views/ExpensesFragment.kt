@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE
 import com.example.fincare.R
 import com.example.fincare.databinding.FragmentExpensesBinding
+import com.financialcare.fincare.budget.one.BudgetViewModel
 import com.financialcare.fincare.common.views.BaseFragment
 import com.financialcare.fincare.common.views.dialog.DeleteDialogBuilder
 import com.financialcare.fincare.common.views.dialog.NotificationDialogBuilder
@@ -52,6 +53,13 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>(R.layout.fragment
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 expensesAdapter.submit(it)
+            }
+            .addTo(compositeDisposable)
+
+        expensesViewModel.deletedExpense
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                budgetViewModel.reload()
             }
             .addTo(compositeDisposable)
 
@@ -142,4 +150,5 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>(R.layout.fragment
     }
 
     private val expensesViewModel: ExpensesViewModel by hiltNavGraphViewModels(R.id.main_navigation)
+    private val budgetViewModel: BudgetViewModel by hiltNavGraphViewModels(R.id.main_navigation)
 }

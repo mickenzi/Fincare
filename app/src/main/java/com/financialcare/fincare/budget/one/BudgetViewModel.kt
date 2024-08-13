@@ -33,6 +33,10 @@ class BudgetViewModel @Inject constructor(
         monthSubject.onNext(month)
     }
 
+    fun reload() {
+        reloadSubject.onNext(Unit)
+    }
+
     val budget: Observable<Pair<Optional<Budget>, YearMonth>>
     val initBudget: Observable<YearMonth>
     val error: Observable<BudgetsError>
@@ -50,6 +54,8 @@ class BudgetViewModel @Inject constructor(
 
     private val selectSubject = PublishSubject.create<Unit>()
 
+    private val reloadSubject = PublishSubject.create<Unit>()
+
     init {
         val now = YearMonth.now()
         minMonth = now.minusYears(1).withMonth(1)
@@ -58,7 +64,11 @@ class BudgetViewModel @Inject constructor(
         selectedMonth = monthSubject
             .startWithItem(now)
 
-        val budget = selectedMonth
+        val budget = Observable
+            .combineLatest(
+                selectedMonth,
+                reloadSubject.startWithItem(Unit)
+            ) { month, _ -> month }
             .switchMapSingle { month ->
                 budgetsRepository
                     .month(month.monthValue)

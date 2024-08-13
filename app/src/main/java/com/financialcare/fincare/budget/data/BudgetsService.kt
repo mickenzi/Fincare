@@ -21,7 +21,7 @@ class BudgetsService @Inject constructor(
             budget.debt,
             budget.month.year,
             budget.month.monthValue,
-            budget.maxExpenseDebt,
+            budget.maxExpenseAmount,
             budget.maxExpenseKind
         )
 
@@ -76,7 +76,7 @@ class BudgetsService @Inject constructor(
             debt = budget.debt,
             balance = budget.income - budget.debt,
             month = YearMonth.of(budget.year, budget.month),
-            maxExpenseDebt = budget.maxExpenseDebt,
+            maxExpenseAmount = budget.maxExpenseAmount,
             maxExpenseKind = budget.maxExpenseKind
         )
     }

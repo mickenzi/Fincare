@@ -30,7 +30,7 @@ interface ExpensesDao : ExpensesDBRepository {
             OffsetDateTime.of(LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)), offset)
 
         add(expense)
-        edit(year, month, expense.amount, kind(st.toLong(), et.toLong()))
+        editInsert(year, month, expense.amount, kind(st.toLong(), et.toLong()))
     }
 
     override fun all(id: String?, time: Long?, kinds: Set<String>, pageSize: Int): Single<List<ExpenseEnt>> {
@@ -70,7 +70,7 @@ interface ExpensesDao : ExpensesDBRepository {
         )
 
         delete(expense.id)
-        edit(year, month, expense.amount, kind(st.toLong(), et.toLong()))
+        editDelete(year, month, expense.amount, maxAmount(st.toLong(), et.toLong()), kind(st.toLong(), et.toLong()))
     }
 
     @Transaction
@@ -107,11 +107,19 @@ interface ExpensesDao : ExpensesDBRepository {
     @Transaction
     @Query(
         "UPDATE budgets " +
-            "SET max_expense_debt = CASE WHEN (:debt >= max_expense_debt OR max_expense_debt IS NULL) " +
-            "THEN :debt ELSE max_expense_debt END," +
+            "SET max_expense_amount = CASE WHEN (:debt >= max_expense_amount OR max_expense_amount IS NULL) " +
+            "THEN :debt ELSE max_expense_amount END," +
             " debt = debt + :debt, max_expense_kind = :kind WHERE year = :year AND month = :month"
     )
-    fun edit(year: Int, month: Int, debt: Long, kind: String)
+    fun editInsert(year: Int, month: Int, debt: Long, kind: String)
+
+    @Transaction
+    @Query(
+        "UPDATE budgets " +
+            "SET max_expense_amount = :maxAmount, debt = debt - :amount, max_expense_kind = :kind" +
+            " WHERE year = :year AND month = :month"
+    )
+    fun editDelete(year: Int, month: Int, amount: Long, maxAmount: Long?, kind: String)
 
     @Transaction
     @Query(
@@ -119,4 +127,8 @@ interface ExpensesDao : ExpensesDBRepository {
             "WHERE time >= :startTime AND time <= :endTime GROUP BY kind ORDER BY SUM(amount) DESC LIMIT 1"
     )
     fun kind(startTime: Long, endTime: Long): String
+
+    @Transaction
+    @Query("SELECT MAX(amount) FROM expenses WHERE time >+ :startTime AND time <= :endTime")
+    fun maxAmount(startTime: Long, endTime: Long): Long?
 }
