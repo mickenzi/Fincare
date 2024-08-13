@@ -4,23 +4,208 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".budget.views.BudgetFragment">
 
-    <LinearLayout
+    <data>
+
+        <import type="kotlin.Unit" />
+
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <variable
+            name="income"
+            type="String" />
+
+        <variable
+            name="debt"
+            type="String" />
+
+        <variable
+            name="balance"
+            type="String" />
+
+        <variable
+            name="maxExpenseAmount"
+            type="String" />
+
+        <variable
+            name="maxExpenseKind"
+            type="String" />
+
+        <variable
+            name="add"
+            type="Function0&lt;Unit&gt;" />
+
+        <variable
+            name="edit"
+            type="Function0&lt;Unit&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl_budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            style="@style/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/budget" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/budget" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-    </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/abl_budget">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/fl_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/screen_spacing" />
+
+                <TextView
+                    android:id="@+id/tv_empty_budget"
+                    style="@style/TextAppearance.Material3.LabelLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/screen_spacing"
+                    android:text="@string/empty_budget"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/screen_spacing"
+                    android:background="@drawable/card_background"
+                    android:elevation="@dimen/card_elevation"
+                    android:orientation="vertical"
+                    android:padding="@dimen/screen_spacing"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_budget_info"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/budget_info" />
+
+                    <TextView
+                        android:id="@+id/tv_income_title"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_spacing"
+                        android:text="@string/income" />
+
+                    <TextView
+                        android:id="@+id/tv_income"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{income}" />
+
+                    <TextView
+                        android:id="@+id/tv_debt_title"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_spacing"
+                        android:text="@string/debt" />
+
+                    <TextView
+                        android:id="@+id/tv_debt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{debt}" />
+
+                    <TextView
+                        android:id="@+id/tv_balance_title"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_spacing"
+                        android:text="@string/balance" />
+
+                    <TextView
+                        android:id="@+id/tv_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{balance}" />
+
+                    <TextView
+                        android:id="@+id/tv_max_expense_amount_title"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_spacing"
+                        android:text="@string/max_expense" />
+
+                    <TextView
+                        android:id="@+id/tv_max_expense_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{maxExpenseAmount}" />
+
+                    <TextView
+                        android:id="@+id/tv_max_expense_kind_title"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_spacing"
+                        android:text="@string/max_kind" />
+
+                    <TextView
+                        android:id="@+id/tv_max_expense_kind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{maxExpenseKind}" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_spacing"
+            android:contentDescription="@string/add"
+            android:onClick="@{() -> add.invoke()}"
+            android:src="@drawable/ic_baseline_add_24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_edit_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/screen_spacing"
+            android:contentDescription="@string/edit"
+            android:onClick="@{() -> edit.invoke()}"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

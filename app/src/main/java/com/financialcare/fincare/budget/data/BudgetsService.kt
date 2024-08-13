@@ -29,11 +29,7 @@ class BudgetsService @Inject constructor(
             .insert(entity)
             .observeOn(Schedulers.computation())
             .onErrorResumeNext {
-                Single.error(
-                    BudgetsError.Unknown(
-                        it.message ?: "Unknown error."
-                    )
-                )
+                Single.error(BudgetsError.Unknown(it.message ?: "Unknown error."))
             }
             .subscribeOn(Schedulers.io())
     }
@@ -43,11 +39,7 @@ class BudgetsService @Inject constructor(
             .edit(year, month, income)
             .observeOn(Schedulers.computation())
             .onErrorResumeNext {
-                Single.error(
-                    BudgetsError.Unknown(
-                        it.message ?: "Unknown error."
-                    )
-                )
+                Single.error(BudgetsError.Unknown(it.message ?: "Unknown error."))
             }
             .subscribeOn(Schedulers.io())
     }
@@ -58,11 +50,7 @@ class BudgetsService @Inject constructor(
             .observeOn(Schedulers.computation())
             .map { it.map(::toBudget) }
             .onErrorResumeNext {
-                Single.error(
-                    BudgetsError.Unknown(
-                        it.message ?: "Unknown error."
-                    )
-                )
+                Single.error(BudgetsError.Unknown(it.message ?: "Unknown error."))
             }
             .subscribeOn(Schedulers.io())
     }

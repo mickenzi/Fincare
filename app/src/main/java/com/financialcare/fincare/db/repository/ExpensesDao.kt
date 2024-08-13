@@ -44,8 +44,11 @@ interface ExpensesDao : ExpensesDBRepository {
         val et =
             OffsetDateTime.of(LocalDateTime.of(endDate, LocalTime.MIDNIGHT.minusSeconds(1)), offset)
 
-        return if (kinds.isEmpty()) all(st.toLong(), et.toLong(), id, time, pageSize)
-        else all(st.toLong(), et.toLong(), id, time, kinds, pageSize)
+        return if (kinds.isEmpty()) {
+            all(st.toLong(), et.toLong(), id, time, pageSize)
+        } else {
+            all(st.toLong(), et.toLong(), id, time, kinds, pageSize)
+        }
     }
 
     @Query("DELETE FROM expenses WHERE time < :time")
@@ -113,7 +116,7 @@ interface ExpensesDao : ExpensesDBRepository {
     @Transaction
     @Query(
         "SELECT kind FROM expenses " +
-            "WHERE time >= :startTime AND time <= :endTime GROUP BY kind ORDER BY COUNT(*) DESC LIMIT 1"
+            "WHERE time >= :startTime AND time <= :endTime GROUP BY kind ORDER BY SUM(amount) DESC LIMIT 1"
     )
     fun kind(startTime: Long, endTime: Long): String
 }

@@ -1,11 +1,13 @@
-package com.financialcare.fincare.budget.add
+package com.financialcare.fincare.budget.edit
 
 import java.time.YearMonth
+import java.util.Optional
 import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import com.financialcare.fincare.budget.Budget
 import com.financialcare.fincare.budget.BudgetsError
 import com.financialcare.fincare.budget.BudgetsRepository
+import com.financialcare.fincare.common.optional.fold
 import com.financialcare.fincare.common.rx.either
 import com.financialcare.fincare.common.rx.filterLeft
 import com.financialcare.fincare.common.rx.filterRight
@@ -17,44 +19,53 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
 
 @HiltViewModel
-class AddBudgetViewModel @Inject constructor(
+class EditBudgetViewModel @Inject constructor(
     private val budgetsRepository: BudgetsRepository
 ) : ViewModel() {
-    fun add() {
-        addSubject.onNext(Unit)
+    fun setMonth(month: YearMonth) {
+        monthSubject.onNext(month)
     }
 
     fun setIncome(income: String) {
         incomeSubject.onNext(income)
     }
 
-    fun setMonth(month: YearMonth) {
-        monthSubject.onNext(month)
+    fun save() {
+        saveSubject.onNext(Unit)
     }
 
-    val savedBudget: Observable<Unit>
+    val budget: Observable<Budget>
     val error: Observable<BudgetsError>
+
+    val savedBudget: Observable<Unit>
 
     val isIncomeValid: Observable<Boolean>
 
-    val isLoading: Observable<Boolean>
-
-    private val incomeSubject = BehaviorSubject.create<String>()
     private val monthSubject = BehaviorSubject.create<YearMonth>()
 
-    private val addSubject = PublishSubject.create<Unit>()
+    private val incomeSubject = BehaviorSubject.create<String>()
+
+    private val saveSubject = PublishSubject.create<Unit>()
 
     init {
+        val loadedBudget = monthSubject
+            .switchMapSingle { month ->
+                budgetsRepository
+                    .month(month.monthValue)
+                    .either<Optional<Budget>, BudgetsError>()
+            }
+            .replay(1)
+            .refCount()
+
+        this.budget = loadedBudget.filterRight().flatMap { it.fold(::empty, ::just) }
+
         val income = incomeSubject.flatMap { it.toLongOrNull()?.let(::just) ?: empty() }
 
-        val savedBudget = addSubject
-            .withLatestFrom(
-                income,
-                monthSubject
-            ) { _, inc, month -> Pair(inc, month) }
+        val savedBudget = saveSubject
+            .withLatestFrom(income, monthSubject) { _, inc, month -> Pair(inc, month) }
             .switchMapSingle { (income, month) ->
                 budgetsRepository
-                    .add(Budget(income = income, month = month))
+                    .edit(month.year, month.monthValue, income)
                     .either<Unit, BudgetsError>()
             }
             .replay(1)
@@ -62,14 +73,12 @@ class AddBudgetViewModel @Inject constructor(
 
         this.savedBudget = savedBudget.filterRight()
 
-        error = savedBudget.filterLeft()
+        error = loadedBudget
+            .filterLeft()
+            .mergeWith(savedBudget.filterLeft())
 
         isIncomeValid = incomeSubject.map { incomeOpt ->
             incomeOpt.toLongOrNull()?.let { it > 0L } ?: false
         }
-
-        isLoading = addSubject
-            .map { true }
-            .mergeWith(savedBudget.map { false })
     }
 }

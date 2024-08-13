@@ -19,6 +19,10 @@
             type="String" />
 
         <variable
+            name="income"
+            type="String" />
+
+        <variable
             name="isIncomeValid"
             type="Observable&lt;Boolean&gt;" />
 
@@ -27,7 +31,7 @@
             type="Function1&lt;String, Unit&gt;" />
 
         <variable
-            name="add"
+            name="edit"
             type="Function0&lt;Unit&gt;" />
     </data>
 
@@ -47,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                app:title="@string/add_budget" />
+                app:title="@string/edit_budget" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -57,7 +61,7 @@
             android:padding="@dimen/screen_spacing">
 
             <TextView
-                android:id="@+id/tv_add_budget_info"
+                android:id="@+id/tv_edit_budget_info"
                 style="@style/TextAppearance.Material3.LabelMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +80,7 @@
                 app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge"
                 app:error="@{@string/required_field}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_add_budget_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_edit_budget_info"
                 app:rxValidation="@{isIncomeValid}">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -84,18 +88,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    android:text="@{income}"
                     app:onTextChange="@{setIncome}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_add"
+                android:id="@+id/btn_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add"
+                android:text="@string/edit"
                 app:rxEnable="@{isIncomeValid}"
                 android:enabled="false"
-                android:onClick="@{() -> add.invoke()}"
+                android:onClick="@{() -> edit.invoke()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 

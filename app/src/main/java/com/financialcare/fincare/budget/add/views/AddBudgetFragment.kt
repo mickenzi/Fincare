@@ -43,11 +43,7 @@ class AddBudgetFragment : BaseFragment<FragmentAddBudgetBinding>(R.layout.fragme
             }
             .addTo(compositeDisposable)
 
-        val notificationDialog = NotificationDialogBuilder.create(
-            context,
-            R.string.ok,
-            DialogInterface::dismiss
-        )
+        val notificationDialog = NotificationDialogBuilder.create(context, R.string.ok, DialogInterface::dismiss)
 
         addBudgetViewModel.error
             .observeOn(AndroidSchedulers.mainThread())

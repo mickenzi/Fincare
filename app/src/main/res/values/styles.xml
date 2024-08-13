@@ -60,4 +60,25 @@
         <item name="android:background">@color/primary_color</item>
         <item name="titleTextColor">@color/white</item>
     </style>
+
+    <style name="image_button" parent="Widget.AppCompat.ImageButton">
+        <item name="android:backgroundTint">@color/transparent</item>
+        <item name="rippleColor">?attr/colorControlHighlight</item>
+        <item name="strokeColor">@color/transparent</item>
+    </style>
+
+    <style name="time_selection_dialog" parent="ThemeOverlay.Material3.Dialog">
+        <item name="android:windowBackground">@drawable/time_selection_dialog_background</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialCalendar.HeaderToggleButton" parent="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="date_selection_dialog" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="materialCalendarHeaderToggleButton">
+            @style/Widget.AppTheme.MaterialCalendar.HeaderToggleButton
+        </item>
+    </style>
+
 </resources>

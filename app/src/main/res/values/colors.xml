@@ -28,4 +28,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="content_placeholder_background">#D4D4D4</color>
     <color name="red">#CC0000</color>
+    <color name="transparent">#00000000</color>
 </resources>

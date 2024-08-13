@@ -32,7 +32,21 @@
     <string name="currency">EUR</string>
     <string name="add_budget">Add Budget</string>
     <string name="add_budget_info">Please define your monthly budget for %1$s before continue</string>
+    <string name="edit_budget">Edit Budget</string>
+    <string name="edit_budget_info">Please define your monthly budget for %1$s before continue</string>
+    <string name="edit">Edit</string>
     <string name="income">Income</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="debt">Debt</string>
+    <string name="balance">Balance</string>
+    <string name="max_expense">The highest amount you have spent</string>
+    <string name="max_kind">Kind you spent most on</string>
+    <string name="empty_budget">You haven\'t defined budget for this month. You can\'t do it for past months.</string>
+    <string name="budget_info">Budget Info</string>
+    <string name="confirm">Confirm</string>
+    <string name="select_time">Select Time</string>
+    <string name="select_date">Select Date</string>
     <!--KIND STRINGS-->
     <string name="food_and_drink">Food &amp; Drink</string>
     <string name="utilities">Utilities</string>
