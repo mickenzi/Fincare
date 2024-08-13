@@ -1,6 +1,11 @@
 package com.financialcare.fincare.expenses.add
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.OffsetDateTime
+import java.time.temporal.WeekFields
+import java.util.Locale
 import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import com.financialcare.fincare.common.rx.either
@@ -29,27 +34,84 @@ class AddExpenseViewModel @Inject constructor(
         amountSubject.onNext(amount)
     }
 
+    fun selectDate(date: LocalDate) {
+        dateSubject.onNext(date)
+    }
+
+    fun selectTime(time: LocalTime) {
+        timeSubject.onNext(time)
+    }
+
+    fun startDateSelection() {
+        isDateSelectionActiveSubject.onNext(true)
+    }
+
+    fun dismissDateSelection() {
+        isDateSelectionActiveSubject.onNext(false)
+    }
+
+    fun startTimeSelection() {
+        isTimeSelectionActiveSubject.onNext(true)
+    }
+
+    fun dismissTimeSelection() {
+        isTimeSelectionActiveSubject.onNext(false)
+    }
+
     val createdExpense: Observable<Unit>
     val error: Observable<ExpensesError>
 
     val kind: Observable<String>
     val amount: Observable<String>
+    val date: Observable<LocalDate>
+    val time: Observable<LocalTime>
+
+    val dateSelection: Observable<LocalDate>
+    val timeSelection: Observable<LocalTime>
 
     val isAmountValid: Observable<Boolean>
 
     val areExpenseDataValid: Observable<Boolean>
 
+    val minDate: LocalDate
+    val maxDate: LocalDate
+
     val isLoading: Observable<Boolean>
 
     private val kindSubject = BehaviorSubject.create<String>()
     private val amountSubject = BehaviorSubject.create<String>()
+    private val dateSubject = BehaviorSubject.create<LocalDate>()
+    private val timeSubject = BehaviorSubject.create<LocalTime>()
+
+    private val isTimeSelectionActiveSubject = PublishSubject.create<Boolean>()
+    private val isDateSelectionActiveSubject = PublishSubject.create<Boolean>()
 
     private val createSubject = PublishSubject.create<Unit>()
 
     init {
+        val now = LocalDate.now()
+
+        maxDate = now
+
+        minDate = now.with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1)
+
         kind = kindSubject
 
         amount = amountSubject
+
+        time = timeSubject
+
+        date = dateSubject
+
+        timeSelection = isTimeSelectionActiveSubject
+            .distinctUntilChanged()
+            .filter { it }
+            .withLatestFrom(time.startWithItem(LocalTime.now())) { _, time -> time }
+
+        dateSelection = isDateSelectionActiveSubject
+            .distinctUntilChanged()
+            .filter { it }
+            .withLatestFrom(date.startWithItem(now)) { _, date -> date }
 
         isAmountValid = amountSubject.map { am ->
             am.toLongOrNull()?.let { it > 0L } ?: false
@@ -58,17 +120,29 @@ class AddExpenseViewModel @Inject constructor(
         areExpenseDataValid = Observable
             .combineLatest(
                 isAmountValid.startWithItem(false),
-                kindSubject.map { !it.isNullOrBlank() }.startWithItem(false)
-            ) { iav, ikv -> iav && ikv }
+                kindSubject.map { !it.isNullOrBlank() }.startWithItem(false),
+                dateSubject.map { true }.startWithItem(false),
+                timeSubject.map { true }.startWithItem(false)
+            ) { iav, ikv, idv, itv -> iav && ikv && idv && itv }
+
+        val dateTime = Observable
+            .combineLatest(
+                dateSubject,
+                timeSubject
+            ) { date, time ->
+                val offset = OffsetDateTime.now().offset
+                OffsetDateTime.of(LocalDateTime.of(date, time), offset)
+            }
 
         val createdExpense = createSubject
             .withLatestFrom(
                 kindSubject,
-                amountSubject
-            ) { _, kind, amount -> Pair(kind, amount) }
-            .switchMapSingle { (kind, amount) ->
+                amountSubject,
+                dateTime
+            ) { _, kind, amount, dt -> Triple(kind, amount, dt) }
+            .switchMapSingle { (kind, amount, dt) ->
                 expensesRepository
-                    .add(OffsetDateTime.now(), amount.toLong(), kind)
+                    .add(dt, amount.toLong(), kind)
                     .either<Unit, ExpensesError>()
             }
             .replay(1)

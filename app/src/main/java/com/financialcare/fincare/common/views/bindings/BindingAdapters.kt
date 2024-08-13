@@ -3,6 +3,7 @@ package com.financialcare.fincare.common.views.bindings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -33,6 +34,14 @@ object BindingAdapters {
                 callback(editable.toString())
             }
         })
+    }
+
+    @JvmStatic
+    @BindingAdapter("onFocus")
+    fun onFocus(view: View, callback: (Boolean) -> Unit) {
+        view.setOnFocusChangeListener { _, hasFocus ->
+            callback(hasFocus)
+        }
     }
 
     private interface AfterTextChangedWatcher : TextWatcher {

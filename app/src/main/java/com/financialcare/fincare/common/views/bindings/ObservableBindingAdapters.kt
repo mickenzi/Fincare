@@ -1,11 +1,17 @@
 package com.financialcare.fincare.common.views.bindings
 
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import android.text.Editable
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.findFragment
+import com.example.fincare.R
 import com.financialcare.fincare.common.views.BaseFragment
 import com.financialcare.fincare.common.views.bindings.TextInputLayoutExtension.setInvalidStyle
 import com.financialcare.fincare.common.views.bindings.TextInputLayoutExtension.setValidStyle
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -53,6 +59,34 @@ object ObservableBindingAdapters {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 view.isEnabled = it
+            }
+            .addTo(baseFragment.compositeDisposable)
+    }
+
+    @JvmStatic
+    @BindingAdapter("rxTime")
+    fun rxTime(editText: TextInputEditText, observable: Observable<LocalTime>) {
+        val baseFragment = editText.findFragment<BaseFragment<Nothing>>()
+        observable
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                val timeFormatter =
+                    DateTimeFormatter.ofPattern(baseFragment.requireContext().getString(R.string.time_format))
+                editText.text = Editable.Factory.getInstance().newEditable(it.format(timeFormatter))
+            }
+            .addTo(baseFragment.compositeDisposable)
+    }
+
+    @JvmStatic
+    @BindingAdapter("rxDate")
+    fun rxDate(editText: TextInputEditText, observable: Observable<LocalDate>) {
+        val baseFragment = editText.findFragment<BaseFragment<Nothing>>()
+        observable
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                val dateFormatter =
+                    DateTimeFormatter.ofPattern(baseFragment.requireContext().getString(R.string.date_format))
+                editText.text = Editable.Factory.getInstance().newEditable(it.format(dateFormatter))
             }
             .addTo(baseFragment.compositeDisposable)
     }

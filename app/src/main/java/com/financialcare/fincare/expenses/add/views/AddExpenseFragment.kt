@@ -11,6 +11,8 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fincare.R
 import com.example.fincare.databinding.FragmentAddExpenseBinding
+import com.financialcare.fincare.common.date.views.DatePickerFactory
+import com.financialcare.fincare.common.time.views.TimeSelectionFragment
 import com.financialcare.fincare.common.views.BaseFragment
 import com.financialcare.fincare.common.views.dialog.LoadingDialogBuilder
 import com.financialcare.fincare.common.views.dialog.NotificationDialogBuilder
@@ -72,6 +74,34 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>(R.layout.frag
             }
             .addTo(compositeDisposable)
 
+        addExpenseViewModel.dateSelection
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { date ->
+                DatePickerFactory
+                    .createSinglePicker(
+                        context = context,
+                        minDate = addExpenseViewModel.minDate,
+                        maxDate = addExpenseViewModel.maxDate,
+                        initDate = date,
+                        onSelect = addExpenseViewModel::selectDate,
+                        onDismiss = addExpenseViewModel::dismissDateSelection
+                    )
+                    .show(childFragmentManager, null)
+            }
+            .addTo(compositeDisposable)
+
+        addExpenseViewModel.timeSelection
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                TimeSelectionFragment(
+                    time = it,
+                    selectTime = addExpenseViewModel::selectTime,
+                    onDismiss = addExpenseViewModel::dismissTimeSelection
+                )
+                    .show(childFragmentManager, null)
+            }
+            .addTo(compositeDisposable)
+
         val loadingDialog = LoadingDialogBuilder.create(context)
 
         addExpenseViewModel.isLoading
@@ -85,11 +115,20 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>(R.layout.frag
             findNavController().navigate(R.id.action_from_add_expense_to_select_kind)
         }
 
-        binding.setAmount = addExpenseViewModel::setAmount
-
+        binding.date = addExpenseViewModel.date
+        binding.time = addExpenseViewModel.time
         binding.isAmountValid = addExpenseViewModel.isAmountValid
         binding.areExpenseDataValid = addExpenseViewModel.areExpenseDataValid
 
+        binding.showDatePicker = { show ->
+            if (show) addExpenseViewModel.startDateSelection()
+        }
+
+        binding.showTimePicker = { show ->
+            if (show) addExpenseViewModel.startTimeSelection()
+        }
+
+        binding.setAmount = addExpenseViewModel::setAmount
         binding.create = addExpenseViewModel::create
 
         binding.toolbar.setNavigationOnClickListener {
@@ -104,7 +143,5 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseBinding>(R.layout.frag
         return context.getString(resId)
     }
 
-    private val addExpenseViewModel: AddExpenseViewModel by hiltNavGraphViewModels(
-        R.id.add_expense_navigation
-    )
+    private val addExpenseViewModel: AddExpenseViewModel by hiltNavGraphViewModels(R.id.add_expense_navigation)
 }

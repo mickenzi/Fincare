@@ -29,7 +29,9 @@ class ExpensesService @Inject constructor(
         return Single
             .fromCallable { expensesDBRepository.insert(entity) }
             .observeOn(Schedulers.computation())
-            .onErrorResumeNext { Single.error(ExpensesError.Unknown(it.message ?: "Unknown error.")) }
+            .onErrorResumeNext {
+                Single.error(ExpensesError.Unknown(it.message ?: "Unknown error."))
+            }
             .subscribeOn(Schedulers.io())
     }
 
@@ -43,7 +45,9 @@ class ExpensesService @Inject constructor(
             )
             .observeOn(Schedulers.computation())
             .map { it.map(::toExpense) }
-            .onErrorResumeNext { Single.error(ExpensesError.Unknown(it.message ?: "Unknown error.")) }
+            .onErrorResumeNext {
+                Single.error(ExpensesError.Unknown(it.message ?: "Unknown error."))
+            }
             .subscribeOn(Schedulers.io())
     }
 
@@ -58,14 +62,18 @@ class ExpensesService @Inject constructor(
         return Single
             .fromCallable { expensesDBRepository.delete(entity) }
             .observeOn(Schedulers.computation())
-            .onErrorResumeNext { Single.error(ExpensesError.Unknown(it.message ?: "Unknown error.")) }
+            .onErrorResumeNext {
+                Single.error(ExpensesError.Unknown(it.message ?: "Unknown error."))
+            }
             .subscribeOn(Schedulers.io())
     }
 
     override fun deleteAll(time: OffsetDateTime): Single<Unit> {
         return expensesDBRepository.deleteAll(time.toLong())
             .observeOn(Schedulers.computation())
-            .onErrorResumeNext { Single.error(ExpensesError.Unknown(it.message ?: "Unknown error.")) }
+            .onErrorResumeNext {
+                Single.error(ExpensesError.Unknown(it.message ?: "Unknown error."))
+            }
             .subscribeOn(Schedulers.io())
     }
 

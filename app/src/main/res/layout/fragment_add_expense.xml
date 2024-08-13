@@ -8,6 +8,12 @@
 
         <import type="kotlin.Unit" />
 
+        <import type="java.time.LocalDate" />
+
+        <import type="java.time.LocalTime" />
+
+        <import type="android.text.InputType" />
+
         <import type="io.reactivex.rxjava3.core.Observable" />
 
         <import type="kotlin.jvm.functions.Function0" />
@@ -29,6 +35,22 @@
         <variable
             name="areExpenseDataValid"
             type="Observable&lt;Boolean&gt;" />
+
+        <variable
+            name="time"
+            type="Observable&lt;LocalTime&gt;" />
+
+        <variable
+            name="date"
+            type="Observable&lt;LocalDate&gt;" />
+
+        <variable
+            name="showTimePicker"
+            type="Function1&lt;Boolean, Unit&gt;" />
+
+        <variable
+            name="showDatePicker"
+            type="Function1&lt;Boolean, Unit&gt;" />
 
         <variable
             name="selectKind"
@@ -99,11 +121,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/price"
-                app:prefixText="@string/currency"
-                app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge"
                 app:error="@{@string/required_field}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_kind"
+                app:prefixText="@string/currency"
+                app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge"
                 app:rxValidation="@{isAmountValid}">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -116,13 +138,55 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_date_picker"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_amount">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_ending_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_date_24"
+                    android:inputType="@{InputType.TYPE_NULL}"
+                    android:onClick="@{() -> showDatePicker.invoke(true)}"
+                    app:onFocus="@{showDatePicker}"
+                    app:rxDate="@{date}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_time_picker"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_date_picker">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_access_time_24"
+                    android:inputType="@{InputType.TYPE_NULL}"
+                    android:onClick="@{() -> showTimePicker.invoke(true)}"
+                    app:onFocus="@{showTimePicker}"
+                    app:rxTime="@{time}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 style="@style/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:onClick="@{() -> create.invoke()}"
                 android:text="@string/create"
-                android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:rxEnable="@{areExpenseDataValid}" />
