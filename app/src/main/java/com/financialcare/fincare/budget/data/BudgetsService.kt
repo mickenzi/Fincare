@@ -44,17 +44,6 @@ class BudgetsService @Inject constructor(
             .subscribeOn(Schedulers.io())
     }
 
-    override fun year(year: Int): Single<List<Budget>> {
-        return budgetsDBRepository
-            .year(year)
-            .observeOn(Schedulers.computation())
-            .map { it.map(::toBudget) }
-            .onErrorResumeNext {
-                Single.error(BudgetsError.Unknown(it.message ?: "Unknown error."))
-            }
-            .subscribeOn(Schedulers.io())
-    }
-
     override fun month(month: Int): Single<Optional<Budget>> {
         return budgetsDBRepository
             .month(month)

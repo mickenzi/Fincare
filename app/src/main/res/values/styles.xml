@@ -81,4 +81,25 @@
         </item>
     </style>
 
+    <style name="chart_line_1">
+        <item name="positiveColor">@color/income</item>
+        <item name="negativeColor">@color/white</item>
+    </style>
+
+    <style name="chart_line_2">
+        <item name="positiveColor">@color/balance</item>
+        <item name="negativeColor">@color/white</item>
+    </style>
+
+    <style name="chart_line_3">
+        <item name="positiveColor">@color/debt</item>
+        <item name="negativeColor">@color/white</item>
+    </style>
+
+    <style name="chart_line_layer_style">
+        <item name="line1Style">@style/chart_line_1</item>
+        <item name="line2Style">@style/chart_line_2</item>
+        <item name="line3Style">@style/chart_line_3</item>
+    </style>
+
 </resources>

@@ -69,6 +69,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.swiperefresh)
+    implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.constraintlayout)
 
     // Hilt
     implementation(libs.hilt)
@@ -78,10 +80,13 @@ dependencies {
 
     // Material
     implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.splashscreen)
-    implementation(libs.androidx.swiperefresh)
+
+    // Calendar
     implementation(libs.calendar)
+
+    // Charts
+    implementation(libs.vico.core)
+    implementation(libs.vico.views)
 
     // RxJava
     implementation(libs.rx.java)

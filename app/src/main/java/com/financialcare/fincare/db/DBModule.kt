@@ -6,6 +6,7 @@ import androidx.room.Room
 import com.example.fincare.BuildConfig
 import com.financialcare.fincare.db.repository.BudgetsDBRepository
 import com.financialcare.fincare.db.repository.ExpensesDBRepository
+import com.financialcare.fincare.db.repository.ReportsDBRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,5 +38,11 @@ object DBModule {
     @Provides
     fun provideExpensesDBRepository(appDatabase: AppDatabase): ExpensesDBRepository {
         return appDatabase.expensesDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideReportsDBRepository(appDatabase: AppDatabase): ReportsDBRepository {
+        return appDatabase.reportsDao()
     }
 }

@@ -19,9 +19,11 @@ import com.financialcare.fincare.common.views.dialog.NotificationDialogBuilder
 import com.financialcare.fincare.common.views.dialog.NotificationDialogBuilder.show
 import com.financialcare.fincare.common.views.recyclerview.EndlessRecyclerViewScrollListener
 import com.financialcare.fincare.expenses.list.ExpensesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
 
+@AndroidEntryPoint
 class ExpensesFragment : BaseFragment<FragmentExpensesBinding>(R.layout.fragment_expenses) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)

@@ -13,4 +13,6 @@
     <dimen name="item_corner_radius">5dp</dimen>
     <dimen name="flow_horizontal_gap">10dp</dimen>
     <dimen name="list_item_height">56dp</dimen>
+    <dimen name="chart_indicator_width">20dp</dimen>
+    <dimen name="chart_indicator_height">3dp</dimen>
 </resources>

@@ -52,9 +52,10 @@
         <FrameLayout
             android:id="@+id/fl_kinds"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/abl_filter_expenses" />
+            app:layout_constraintTop_toBottomOf="@id/abl_filter_expenses"
+            app:layout_constraintBottom_toTopOf="@id/btn_flow"/>
 
         <Button
             android:id="@+id/btn_clear"

@@ -29,4 +29,7 @@
     <color name="content_placeholder_background">#D4D4D4</color>
     <color name="red">#CC0000</color>
     <color name="transparent">#00000000</color>
+    <color name="income">#35618E</color>
+    <color name="balance">#00FF00</color>
+    <color name="debt">#CC0000</color>
 </resources>

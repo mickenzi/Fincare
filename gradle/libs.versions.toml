@@ -31,6 +31,8 @@ espressoCore = "3.6.1"
 
 calendar = "2.5.4"
 
+vico = "2.0.0-alpha.28"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKTX" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -50,6 +52,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
 androidx-swiperefresh = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeRefreshLayout" }
 calendar = { group = "com.kizitonwose.calendar", name = "view", version.ref = "calendar" }
+vico-core = { group = "com.patrykandpatrick.vico", name = "core", version.ref = "vico" }
+vico-views = { group = "com.patrykandpatrick.vico", name = "views", version.ref = "vico" }
 
 rx-java = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxJava" }
 rx-kotlin = { group = "io.reactivex.rxjava3", name = "rxkotlin", version.ref = "rxKotlin" }

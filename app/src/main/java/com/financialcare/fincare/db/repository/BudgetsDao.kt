@@ -16,7 +16,4 @@ interface BudgetsDao : BudgetsDBRepository {
 
     @Query("SELECT * FROM budgets WHERE month = :month")
     override fun month(month: Int): Single<BudgetEnt>
-
-    @Query("SELECT * FROM budgets WHERE year = :year")
-    override fun year(year: Int): Single<List<BudgetEnt>>
 }

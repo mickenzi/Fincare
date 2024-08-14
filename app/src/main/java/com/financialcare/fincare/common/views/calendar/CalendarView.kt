@@ -27,7 +27,8 @@ class CalendarView(context: Context, attrs: AttributeSet) : LinearLayout(context
         weekView.forEachIndexed { index, textView ->
             val daysOfWeek = daysOfWeek()
             val dayOfWeek = daysOfWeek[index]
-            textView.text = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
+            textView.text =
+                dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()).replaceFirstChar(Char::uppercase)
         }
 
         if (disabledScroll) {

@@ -42,13 +42,17 @@
     <string name="balance">Balans</string>
     <string name="max_expense">Najveći iznos koji ste potrošili</string>
     <string name="max_kind">Vrsta na koju ste najviše potrošili</string>
-    <string name="empty_budget">Niste definisali budžet za ovaj mesec. Takođe budžet se može definisati samo za trenutni mesec kao i za naredne mesece.</string>
+    <string name="empty_budget">Niste definisali budžet za ovaj mesec. Budžet se može definisati samo za trenutni mesec i naredne mesece.</string>
     <string name="budget_info">Informacije o budžetu</string>
     <string name="confirm">Potvrdi</string>
     <string name="select_time">Izaberi vreme</string>
     <string name="select_date">Izaberi datum</string>
+    <string name="x_asis">x-asis</string>
+    <string name="y_asis">y-asis</string>
+    <string name="months">Meseci</string>
+    <string name="price_with_currency">Iznos / EUR</string>
     <!--KIND STRINGS-->
-    <string name="food_and_drink">Hrana &amp; piće</string>
+    <string name="food_and_drink">Hrana &amp; Piće</string>
     <string name="utilities">Računi</string>
     <string name="grocery">Namirnice</string>
     <string name="transport">Vozilo</string>

@@ -2,11 +2,51 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".reports.views.ReportsFragment">
+    tools:context=".reports.list.views.ReportsFragment">
+
+    <data>
+
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <import type="kotlin.Unit" />
+
+        <variable
+            name="currentYear"
+            type="String" />
+
+        <variable
+            name="xAsis"
+            type="String" />
+
+        <variable
+            name="yAsis"
+            type="String" />
+
+        <variable
+            name="first"
+            type="String" />
+
+        <variable
+            name="second"
+            type="String" />
+
+        <variable
+            name="third"
+            type="String" />
+
+        <variable
+            name="increaseYear"
+            type="Function0&lt;Unit&gt;" />
+
+        <variable
+            name="decreaseYear"
+            type="Function0&lt;Unit&gt;" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -22,5 +62,227 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/medium_spacing"
+                    android:weightSum="3">
+
+                    <ImageButton
+                        android:id="@+id/btn_previous"
+                        style="@style/image_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:contentDescription="@string/previous"
+                        android:onClick="@{() -> decreaseYear.invoke()}"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
+                    <TextView
+                        android:id="@+id/tv_current_year"
+                        style="?attr/textAppearanceTitleLarge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center_horizontal"
+                        android:text="@{currentYear}" />
+
+                    <ImageButton
+                        android:id="@+id/btn_next"
+                        style="@style/image_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:contentDescription="@string/next"
+                        android:onClick="@{() -> increaseYear.invoke()}"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/screen_spacing"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/medium_spacing">
+
+                    <com.patrykandpatrick.vico.views.cartesian.CartesianChartView
+                        android:id="@+id/balance_chart_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layers="line"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lineLayerStyle="@style/chart_line_layer_style"
+                        app:showBottomAxis="true"
+                        app:showStartAxis="true" />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_asis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/balance_chart_view">
+
+                        <TextView
+                            android:id="@+id/tv_x_asis"
+                            style="@style/TextAppearance.Material3.LabelSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{xAsis}" />
+
+                        <TextView
+                            android:id="@+id/tv_y_asis"
+                            style="@style/TextAppearance.Material3.LabelSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/medium_spacing"
+                            android:text="@{yAsis}" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/income_indicator"
+                        android:layout_width="@dimen/chart_indicator_width"
+                        android:layout_height="@dimen/chart_indicator_height"
+                        android:background="@color/income"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_income"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_income" />
+
+                    <TextView
+                        android:id="@+id/tv_income"
+                        style="@style/TextAppearance.Material3.LabelSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_spacing"
+                        android:text="@string/income"
+                        app:layout_constraintStart_toEndOf="@id/income_indicator"
+                        app:layout_constraintTop_toBottomOf="@id/ll_asis" />
+
+                    <View
+                        android:id="@+id/balance_indicator"
+                        android:layout_width="@dimen/chart_indicator_width"
+                        android:layout_height="@dimen/chart_indicator_height"
+                        android:background="@color/balance"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_balance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_balance" />
+
+                    <TextView
+                        android:id="@+id/tv_balance"
+                        style="@style/TextAppearance.Material3.LabelSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_spacing"
+                        android:text="@string/balance"
+                        app:layout_constraintStart_toEndOf="@id/balance_indicator"
+                        app:layout_constraintTop_toBottomOf="@id/tv_income"
+                        app:layout_goneMarginStart="@dimen/small_spacing" />
+
+                    <View
+                        android:id="@+id/debt_indicator"
+                        android:layout_width="@dimen/chart_indicator_width"
+                        android:layout_height="@dimen/chart_indicator_height"
+                        android:background="@color/debt"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_debt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_debt" />
+
+                    <TextView
+                        android:id="@+id/tv_debt"
+                        style="@style/TextAppearance.Material3.LabelSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_spacing"
+                        android:text="@string/debt"
+                        app:layout_constraintStart_toEndOf="@id/debt_indicator"
+                        app:layout_constraintTop_toBottomOf="@id/tv_balance" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/screen_spacing"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/medium_spacing">
+
+                    <TextView
+                        android:id="@+id/tv_max_kind"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/full_divider"
+                        android:paddingVertical="@dimen/small_spacing"
+                        android:text="@string/max_kind"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_empty_max_kind"
+                        style="@style/TextAppearance.Material3.LabelLarge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/expense_empty_description"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_max_kind" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_kinds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:weightSum="3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_max_kind">
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingVertical="@dimen/medium_spacing" />
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingVertical="@dimen/medium_spacing" />
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelLarge"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingVertical="@dimen/medium_spacing" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
     </LinearLayout>
 </layout>

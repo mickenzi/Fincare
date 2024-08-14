@@ -14,7 +14,7 @@ import com.financialcare.fincare.common.views.BaseFragment
 import com.financialcare.fincare.common.views.page.PageAdapter
 import com.financialcare.fincare.common.views.page.Screen
 import com.financialcare.fincare.expenses.list.views.ExpensesFragment
-import com.financialcare.fincare.reports.views.ReportsFragment
+import com.financialcare.fincare.reports.list.views.ReportsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

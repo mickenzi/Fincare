@@ -87,100 +87,110 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:padding="@dimen/screen_spacing">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_kind"
-                style="@style/input_field"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/medium_spacing"
-                android:hint="@string/kind"
+                android:layout_height="0dp"
+                android:fillViewport="true"
+                app:layout_constraintBottom_toTopOf="@id/btn_create"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_kind"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
-                    android:focusable="false"
-                    android:inputType="text"
-                    android:onClick="@{() -> selectKind.invoke()}"
-                    android:text="@{kind}" />
+                    android:orientation="vertical">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_kind"
+                        style="@style/input_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_spacing"
+                        android:hint="@string/kind">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_amount"
-                style="@style/input_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/price"
-                app:error="@{@string/required_field}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_kind"
-                app:prefixText="@string/currency"
-                app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge"
-                app:rxValidation="@{isAmountValid}">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_kind"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:onClick="@{() -> selectKind.invoke()}"
+                            android:text="@{kind}" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@{amount}"
-                    app:onTextChange="@{setAmount}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_amount"
+                        style="@style/input_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/price"
+                        app:error="@{@string/required_field}"
+                        app:prefixText="@string/currency"
+                        app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        app:rxValidation="@{isAmountValid}">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_date_picker"
-                style="@style/input_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/select_date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_amount">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="@{amount}"
+                            app:onTextChange="@{setAmount}" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_ending_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_baseline_date_24"
-                    android:inputType="@{InputType.TYPE_NULL}"
-                    android:onClick="@{() -> showDatePicker.invoke(true)}"
-                    app:onFocus="@{showDatePicker}"
-                    app:rxDate="@{date}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_date_picker"
+                        style="@style/input_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/select_date">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_time_picker"
-                style="@style/input_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/select_time"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_date_picker">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_ending_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_baseline_date_24"
+                            android:inputType="@{InputType.TYPE_NULL}"
+                            android:onClick="@{() -> showDatePicker.invoke(true)}"
+                            app:onFocus="@{showDatePicker}"
+                            app:rxDate="@{date}" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_baseline_access_time_24"
-                    android:inputType="@{InputType.TYPE_NULL}"
-                    android:onClick="@{() -> showTimePicker.invoke(true)}"
-                    app:onFocus="@{showTimePicker}"
-                    app:rxTime="@{time}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_time_picker"
+                        style="@style/input_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/select_time">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_baseline_access_time_24"
+                            android:inputType="@{InputType.TYPE_NULL}"
+                            android:onClick="@{() -> showTimePicker.invoke(true)}"
+                            app:onFocus="@{showTimePicker}"
+                            app:rxTime="@{time}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
 
             <Button
+                android:id="@+id/btn_create"
                 style="@style/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,6 +200,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:rxEnable="@{areExpenseDataValid}" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 </layout>

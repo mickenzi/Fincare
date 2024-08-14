@@ -7,5 +7,4 @@ interface BudgetsDBRepository {
     fun insert(budgetEnt: BudgetEnt): Single<Unit>
     fun edit(year: Int, month: Int, income: Long): Single<Unit>
     fun month(month: Int): Single<BudgetEnt>
-    fun year(year: Int): Single<List<BudgetEnt>>
 }
